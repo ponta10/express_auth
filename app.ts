@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth";
 import memoRoutes from "./routes/memo";
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
