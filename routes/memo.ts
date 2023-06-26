@@ -4,8 +4,10 @@ import { verifyToken } from '../utils/verifyToken';
 
 const router = express.Router();
 
+// リクエストを送る前にverifyTokenミドルウェアを実行
 router.post('/', verifyToken, async (req: Request, res: Response) => {
     const { title, content } = req.body;
+    // JWT トークンのペイロードには、一般的にユーザーの一意の識別子（この場合は _id）が含まれています
     const userId = (req as any).user._id;
 
     const memo = new Memo({ title, content, userId });

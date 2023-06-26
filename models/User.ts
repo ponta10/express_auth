@@ -19,10 +19,10 @@ userSchema.pre('save', async function(next: (error?: any) => void) {
 });  
 
 // 与えられたパスワードがデータベースに保存されたハッシュ化されたパスワードと一致するかどうかを確認するメソッドを定義しています。
-userSchema.methods.comparePassword = function(password: string) {
-  const user = this as any;
-  return bcrypt.compare(password, user.password);
-};
+// userSchema.methods.comparePassword = function(password: string) {
+//   const user = this as any;
+//   return bcrypt.compare(password, user.password);
+// };
 
 const User = mongoose.model('User', userSchema);
 export default User;
