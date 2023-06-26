@@ -1,16 +1,21 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import authRoutes from './routes/auth';
-import memoRoutes from './routes/memo';
+import express from "express";
+import mongoose from "mongoose";
+import authRoutes from "./routes/auth";
+import memoRoutes from "./routes/memo";
+
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-mongoose.connect(process.env.DB_CONNECTION_STRING || '')
-  .then(() => console.log('Database connected'))
-  .catch(err => console.log(err));
+app.use("/auth", authRoutes);
+app.use("/memo", memoRoutes);
 
-app.use('/auth', authRoutes);
-app.use('/memo', memoRoutes);
-
-app.listen(3000, () => console.log('Server started'));
+mongoose
+  .connect(process.env.DB_CONNECTION_STRING || "")
+  .then(() =>
+    app.listen(4000, () =>
+      console.log(`Server running on http://localhost:4000`)
+    )
+  )
+  .catch((err) => console.log(err));
